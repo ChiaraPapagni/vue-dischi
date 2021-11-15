@@ -1,11 +1,21 @@
 <template>
-  <main id="site_main"></main>
+  <main id="site_main">
+    <CardList />
+  </main>
   <!-- /#site_main -->
 </template>
 
 <script>
-export default {};
+import CardList from "./CardList.vue";
+
+export default {
+  components: {
+    CardList,
+  },
+};
 </script>
 
 <style lang="scss">
+#site_main {
+}
 </style>
