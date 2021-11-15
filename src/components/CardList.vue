@@ -2,7 +2,7 @@
   <div class="cards mt-5">
     <div
       class="cards_row d-flex justify-content-center flex-wrap"
-      v-if="!loading"
+      v-if="!loading && error === ''"
     >
       <div class="col-lg-2" v-for="album in albums" :key="album.title">
         <div class="card text-center my-2 rounded-0">
@@ -14,8 +14,15 @@
         <!-- /.card -->
       </div>
     </div>
+    <!-- /.cards -->
 
-    <div class="loading" v-else>Loading ...</div>
+    <div class="loading" v-else-if="loading && error === ''">
+      <h2 class="text-center text-uppercase">Loading ...</h2>
+    </div>
+    <!-- /.loading -->
+
+    <div class="error" v-else-if="error != ' '">{{ error }}</div>
+    <!-- /.error -->
   </div>
   <!-- ./cards -->
 </template>
@@ -33,7 +40,7 @@ export default {
     };
   },
   mounted() {
-    setTimeout(this.callApi, 3000);
+    setTimeout(this.callApi, 2500);
   },
   methods: {
     callApi() {
@@ -78,6 +85,10 @@ export default {
       color: $text_gray_color;
       font-size: 1.1rem;
     }
+  }
+  .loading {
+    color: white;
+    font-weight: bold;
   }
 }
 </style>
