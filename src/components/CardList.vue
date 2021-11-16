@@ -1,7 +1,13 @@
 <template>
   <div class="cards mt-5">
-    <SelectGenre :genres="genresList" @select-genre="filter" />
-    <!-- /.select_genre -->
+    <div class="filter">
+      <SelectGenre :genres="genresList" @select-genre="filterGenre" />
+      <!-- /.select_genre -->
+
+      <SelectArtist :artists="artistsList" @select-artist="filterArtist" />
+      <!-- /.select_artist -->
+    </div>
+    <!-- /.filter -->
 
     <div
       class="cards_row d-flex justify-content-center flex-wrap"
@@ -29,11 +35,13 @@
 
 <script>
 import SelectGenre from "./SelectGenre.vue";
+import SelectArtist from "./SelectArtist.vue";
 import axios from "axios";
 
 export default {
   components: {
     SelectGenre,
+    SelectArtist,
   },
   data() {
     return {
@@ -42,6 +50,8 @@ export default {
       API_URL: "https://flynn.boolean.careers/exercises/api/array/music",
       selectedGenre: "",
       genresList: [],
+      selectedArtist: "",
+      artistsList: [],
     };
   },
   mounted() {
@@ -55,8 +65,14 @@ export default {
           this.albums = r.data.response;
 
           this.albums.forEach((album) => {
+            //popolo array genresList
             if (!this.genresList.includes(album.genre)) {
               this.genresList.push(album.genre);
+            }
+
+            //popolo array artistsList
+            if (!this.artistsList.includes(album.author)) {
+              this.artistsList.push(album.author);
             }
           });
 
@@ -66,8 +82,11 @@ export default {
           console.log(e);
         });
     },
-    filter(event) {
+    filterGenre(event) {
       this.selectedGenre = event;
+    },
+    filterArtist(event) {
+      this.selectedArtist = event;
     },
   },
   computed: {
