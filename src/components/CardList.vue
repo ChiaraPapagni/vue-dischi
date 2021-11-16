@@ -1,5 +1,14 @@
 <template>
   <div class="cards mt-5">
+    <select class="form-select" aria-label="select">
+      <option selected>Select the genre</option>
+      <option value="jazz">Jazz</option>
+      <option value="metal">Metal</option>
+      <option value="pop">Pop</option>
+      <option value="rock">Rock</option>
+    </select>
+    <!-- /.form-select -->
+
     <div
       class="cards_row d-flex justify-content-center flex-wrap"
       v-if="!loading && error === ''"
@@ -40,7 +49,7 @@ export default {
     };
   },
   mounted() {
-    setTimeout(this.callApi, 2500);
+    setTimeout(this.callApi, 0);
   },
   methods: {
     callApi() {
