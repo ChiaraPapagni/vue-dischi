@@ -91,8 +91,11 @@ export default {
   },
   computed: {
     getFilteredAlbums() {
-      return this.albums.filter((album) => {
-        return album.genre.includes(this.selectedGenre);
+      return this.albums.filter((element) => {
+        return (
+          element.genre.includes(this.selectedGenre) &&
+          element.author.includes(this.selectedArtist)
+        );
       });
     },
   },
