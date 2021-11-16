@@ -2,7 +2,7 @@
   <div class="select_genre mb-5">
     <p>Filter by genre:</p>
     <select
-      class="w-25 form-select m-auto"
+      class="form-select m-auto"
       name="genres"
       id="genres"
       v-model="selectedGenre"

@@ -103,6 +103,12 @@ export default {
 @import "../assets/scss/variables.scss";
 
 .cards {
+  .filter {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+  }
+
   .card {
     width: calc(150px + 3rem);
     height: 350px;

@@ -2,7 +2,7 @@
   <div class="select_artist mb-5">
     <p>Filter by artist:</p>
     <select
-      class="w-25 form-select m-auto"
+      class="form-select m-auto"
       name="artist"
       id="artist"
       v-model="selectedArtist"
