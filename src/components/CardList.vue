@@ -107,6 +107,11 @@ export default {
     display: flex;
     justify-content: center;
     gap: 5rem;
+
+    p {
+      margin: 0;
+      padding: 0.5rem 1rem;
+    }
   }
 
   .card {
