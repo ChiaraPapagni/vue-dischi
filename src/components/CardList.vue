@@ -45,7 +45,7 @@ export default {
     };
   },
   mounted() {
-    setTimeout(this.callApi, 0);
+    setTimeout(this.callApi, 500);
   },
   methods: {
     callApi() {
