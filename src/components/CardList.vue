@@ -1,19 +1,13 @@
 <template>
   <div class="cards mt-5">
-    <select class="form-select" aria-label="select">
-      <option selected>Select the genre</option>
-      <option value="jazz">Jazz</option>
-      <option value="metal">Metal</option>
-      <option value="pop">Pop</option>
-      <option value="rock">Rock</option>
-    </select>
-    <!-- /.form-select -->
+    <SelectGenre :genres="genresList" @select-genre="filter" />
+    <!-- /.select_genre -->
 
     <div
       class="cards_row d-flex justify-content-center flex-wrap"
-      v-if="!loading && error === ''"
+      v-if="!loading"
     >
-      <div class="col-lg-2" v-for="album in albums" :key="album.title">
+      <div class="col-lg-2" v-for="(album, i) in getFilteredAlbums" :key="i">
         <div class="card text-center my-2 rounded-0">
           <img :src="album.poster" :alt="album.title" class="img-fluid" />
           <h4 class="text-uppercase mt-3 mb-4">{{ album.title }}</h4>
@@ -25,27 +19,29 @@
     </div>
     <!-- /.cards -->
 
-    <div class="loading" v-else-if="loading && error === ''">
+    <div class="loading" v-else-if="loading">
       <h2 class="text-center text-uppercase">Loading ...</h2>
     </div>
     <!-- /.loading -->
-
-    <div class="error" v-else-if="error != ' '">{{ error }}</div>
-    <!-- /.error -->
   </div>
   <!-- ./cards -->
 </template>
 
 <script>
+import SelectGenre from "./SelectGenre.vue";
 import axios from "axios";
 
 export default {
+  components: {
+    SelectGenre,
+  },
   data() {
     return {
       albums: [],
       loading: true,
-      error: "",
       API_URL: "https://flynn.boolean.careers/exercises/api/array/music",
+      selectedGenre: "",
+      genresList: [],
     };
   },
   mounted() {
@@ -57,12 +53,28 @@ export default {
         .get(this.API_URL)
         .then((r) => {
           this.albums = r.data.response;
+
+          this.albums.forEach((album) => {
+            if (!this.genresList.includes(album.genre)) {
+              this.genresList.push(album.genre);
+            }
+          });
+
           this.loading = false;
         })
         .catch((e) => {
           console.log(e);
-          this.error = "OPS!";
         });
+    },
+    filter(event) {
+      this.selectedGenre = event;
+    },
+  },
+  computed: {
+    getFilteredAlbums() {
+      return this.albums.filter((album) => {
+        return album.genre.includes(this.selectedGenre);
+      });
     },
   },
 };
