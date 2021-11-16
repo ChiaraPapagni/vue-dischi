@@ -16,9 +16,9 @@ export default {};
   background-color: $light_background_color;
 
   img {
-    width: 50px;
-    height: 50px;
-    margin: 0.7rem 1rem;
+    width: 40px;
+    height: 40px;
+    margin: 0.5rem 0.7rem;
   }
 }
 </style>

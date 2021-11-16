@@ -1,5 +1,5 @@
 <template>
-  <div class="cards mt-5">
+  <div class="cards mt-4">
     <div class="filter">
       <SelectGenre :genres="genresList" @select-genre="filterGenre" />
       <!-- /.select_genre -->
@@ -16,7 +16,7 @@
       <div class="col-lg-2" v-for="(album, i) in getFilteredAlbums" :key="i">
         <div class="card text-center my-2 rounded-0">
           <img :src="album.poster" :alt="album.title" class="img-fluid" />
-          <h4 class="text-uppercase mt-3 mb-4">{{ album.title }}</h4>
+          <h4 class="text-uppercase my-3">{{ album.title }}</h4>
           <p class="py-0 my-0">{{ album.author }}</p>
           <p class="py-0 my-0">{{ album.year }}</p>
         </div>
@@ -111,30 +111,34 @@ export default {
     p {
       margin: 0;
       padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+    select {
+      font-size: 0.9rem;
     }
   }
 
   .card {
-    width: calc(150px + 3rem);
-    height: 350px;
+    width: calc(130px + 3rem);
+    height: 320px;
     margin: auto;
     padding: 1.5rem;
     background-color: $light_background_color;
 
     img {
-      max-width: 150px;
-      margin: auto;
+      max-width: 130px;
+      margin: 0 auto;
     }
 
     h4 {
       color: white;
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: bold;
     }
 
     p {
       color: $text_gray_color;
-      font-size: 1.1rem;
+      font-size: 0.9rem;
     }
   }
   .loading {
